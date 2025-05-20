@@ -1,40 +1,89 @@
 #include <stdio.h>
 
-// Desafio Batalha Naval - MateCheck
-// Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
-// Siga os comentários para implementar cada parte do desafio.
+int main(){
+    /*
+        Inicialização do Tabuleiro.
+    */
+    int tabuleiro[10][10] = {
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0,},
+    };
 
-int main() {
-    // Nível Novato - Posicionamento dos Navios
-    // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
-    // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
-    // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
+    /*
+        Inicio das Coordenadas dos Navios.
+    */
+    int navio1[3] = {2,3,4};
+    int navio2[3] = {2,3,4};
+    int erro = 0;
+    /*
+        Inicio de Verificações das Coordenadas dos Navios no Tabuleiro.
+    */    
+    /*
+        Se o Primeiro Navio exceder o Tabuleiro o Usuário será alertado.
+    */   
+    if((navio1[0] + 3) > 10){
+        printf("Não foi possível continuar, as coordenadas do primeiro navio excedem o tamanho do tabuleiro.\n");
+        erro = 1;
+    }
+    /*
+        Se o Segundo Navio exceder o Tabuleiro o Usuário será alertado.
+    */
+    else if((navio2[0] + 3) > 10){
+        printf("Não foi possível continuar, as coordenadas do segundo navio excedem o tamanho do tabuleiro.\n");
+        erro = 1;
+    }
+    /*
+        Se os Navios estiverem se sobrepondo o Usuário será alertado.
+    */
+    if(navio1[0] == 0 && navio2[0] == 0){
+        printf("Os Navios estão se sobrepondo, mude as coordenadas de algum Navio.");
+        erro = 1;
+    }
 
-    // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
-    // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
-    // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
-    // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
-
-    // Nível Mestre - Habilidades Especiais com Matrizes
-    // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
-    // Sugestão: Utilize estruturas de repetição aninhadas para preencher as áreas afetadas por essas habilidades no tabuleiro.
-    // Sugestão: Exiba o tabuleiro com as áreas afetadas, utilizando 0 para áreas não afetadas e 1 para áreas atingidas.
-
-    // Exemplos de exibição das habilidades:
-    // Exemplo para habilidade em cone:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 1 1 1 1 1
-    
-    // Exemplo para habilidade em octaedro:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 0 0 1 0 0
-
-    // Exemplo para habilidade em cruz:
-    // 0 0 1 0 0
-    // 1 1 1 1 1
-    // 0 0 1 0 0
-
-    return 0;
+    /*
+        Exibição do Tabuleiro no Terminal.
+    */
+    if(!erro){
+        for(int x = 0; x < 10; x++){
+            for(int y = 0; y < 10; y++){
+                int encontrado = 0;
+                /*
+                    Verifica a posição do Primeiro Navio no Tabuleiro.
+                */
+                if(y == 0){
+                    for(int i = 0; i < 3; i++){
+                        if(x == navio1[i]){
+                            printf("3 ");
+                            encontrado = 1;
+                        }
+                    }
+                }
+                /*
+                    Verifica a posição do Segundo Navio no Tabuleiro.
+                */
+                if(x == 0){
+                    for(int i = 0; i < 3; i++){
+                        if(y == navio2[i]){
+                            printf("3 ");
+                            encontrado = 1;
+                        }
+                    }               
+                }
+                /*
+                    Caso nenhum Navio esteja ocupando esta posição, colocará como Água.
+                */
+                if(encontrado == 0){
+                    printf("0 ");
+                }
+            }printf("\n");
+        }
+    }
 }
